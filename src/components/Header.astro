@@ -1,17 +1,33 @@
 <!-- HTML -->
 <div class="header_container">
     <div class="title">
-        <div class="logo">
-            <img src="" alt="">
-            <h1>n-bit</h1>
-        </div>
-        <h4>A cura di Nicola Moro</h4>
+        <img src="/account.png" alt="account_image">
+        <h2>Nicola Moro</h2>
     </div>
-    <div class="menu">
-        <a href="/">Blog</a>
-        <a href="/progetti">Progetti</a>
-        <a href="/contatti">Contatti</a>
+    <div class="menu_container">
+        <a href="/blog">Blog</a>
+        <a href="/projects">Progetti</a>
+        <a href="/resources">Risorse</a>
+        <a href="/cv">CV</a>
     </div>
+    <div class="icons_row">
+        <a href="https://www.instagram.com/">
+            <img src="/instagram.png" alt="instagram_icon">
+        </a>
+        <a href="https://www.threads.com/@moro.nicola">
+            <img src="/threads.png" alt="threads_icon">
+        </a>
+        <a href="https://www.reddit.com/user/NicolaM1994/">
+            <img src="/reddit.png" alt="reddit_icon">
+        </a>
+        <a href="https://medium.com/@nicola.moro2312">
+            <img src="/medium.png" alt="medium_icon">
+        </a>
+        <a href="mailto:nicola.moro2312@gmail.com">
+            <img src="/mail.png" alt="mail_icon">
+        </a>
+    </div>
+    
 </div>
 
 <!-- CSS -->
@@ -19,7 +35,7 @@
 
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-    h1, h4, p {
+    h1, h2, h4, p, a {
         font-family: 'Roboto Mono';
     }
 
@@ -27,25 +43,47 @@
         text-decoration: none;
     }
 
+    .author_image {
+        width: 35%;
+        border-radius: 50%;
+    }
+
     .header_container {
         display:flex;
+        width: 25%;
+        height: 100%;
         flex-direction: column;
+        justify-content: space-around;
         align-items: center;
         background-color: red;
     }
 
     .title {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-around;
+        height: 25%;
+        width: 100%;
         align-items: center;
         background-color: yellow;
     }
 
-    .logo {
+    .menu_container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 50%;
+        height: 60%;
         align-items: center;
-        background-color: green;
+        background-color: violet;
     }
 
+    .icons_row {
+        height: 20%;
+        width: 95%;
+        display: flex;
+        flex-direction: row;
+        align-items: last baseline;
+        justify-content: space-around;
+    }
 </style>
