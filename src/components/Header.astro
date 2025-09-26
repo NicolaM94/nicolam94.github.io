@@ -1,14 +1,15 @@
 <!-- HTML -->
 <div class="header_container">
     <div class="title">
-        <img src="/account.png" alt="account_image">
-        <h2>Nicola Moro</h2>
+        <img class="account_img" src="/account.jpg" alt="account_image">
+        <h1>Nicola Moro</h1>
     </div>
     <div class="menu_container">
-        <a href="/blog">Blog</a>
-        <a href="/projects">Progetti</a>
-        <a href="/resources">Risorse</a>
-        <a href="/cv">CV</a>
+        <a href="/blog">🗞️ Blog</a>
+        <a href="/projects">👷 Progetti</a>
+        <a href="/resources">💾 Risorse</a>
+        <a href="/cv">🪪 CV</a>
+        <a href="">🌠 Preferiti</a>
     </div>
     <div class="icons_row">
         <a href="https://github.com/NicolaM94">
@@ -41,6 +42,10 @@
 
     a {
         text-decoration: none;
+        font-size: 18px;
+        font-weight: bolder;
+        color: rgb(0, 172, 92);
+        letter-spacing: 1.5px;
     }
 
     .author_image {
@@ -50,12 +55,14 @@
 
     .header_container {
         display:flex;
-        width: 30%;
+        max-width: 40%;
+        padding-left: 1%;
+        padding-right: 1%;
         height: 100%;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content:space-between;
         align-items: center;
-        background-color: red;
+        background: rgb(252, 252, 252);
     }
 
     .title {
@@ -65,7 +72,7 @@
         height: 25%;
         width: 100%;
         align-items: center;
-        background-color: yellow;
+        background-color: transparent;
     }
 
     .menu_container {
@@ -73,9 +80,9 @@
         flex-direction: column;
         justify-content: space-around;
         width: 50%;
-        height: 60%;
-        align-items: center;
-        background-color: violet;
+        height: 40%;
+        align-items: start;
+        background-color: transparent;
     }
 
     .icons_row {
@@ -85,6 +92,11 @@
         flex-direction: row;
         align-items: last baseline;
         justify-content: space-around;
-        gap: 10px;
+        padding-bottom: 5%;
+    }
+    .account_img {
+        width: 30%;
+        border-radius: 40%;
+        padding: 10px;
     }
 </style>

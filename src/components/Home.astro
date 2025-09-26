@@ -1,23 +1,41 @@
+---
+import {butterClient} from "../libs/buttercms";
+const response = await butterClient.post.list()
+const pageData = response.data?.data;
+
+
+const posts = pageData?.slice(0,3)
+---
+
+
 <div class="home_container">
+    <a href="https://projecteuler.net/progress"><img style="position: absolute;right:1%;top:3%" src="https://projecteuler.net/profile/NicolaM94.png" alt=""></a>
     <p>Ciao! 👋</p>
-    <h2>Mi chiamo Nicola</h2>
-    <h4>Software engeneering e sviluppo</h4>
-    <p>> Sono uno studente di Informatica all'Università degli Studi di Verona, dove ho anche studiato Economia conseguendo la mia 
+    <h2>Io sono Nicola</h2>
+    <h4>Sviluppo software e matematica 🧑‍💻📚</h4>
+    <p>> Studente di Informatica all'Università degli Studi di Verona, dove ho anche studiato Economia conseguendo la mia 
         prima laurea.</p>
     <p>> I miei interessi principali sono la matematica, la logica, gli algoritmi e l'ingegneria del software.</p>
-    <p>> Nel tempo libero suono, ascolto (davvero troppa...) musica, leggo, cerco di far sopravvivere il mio mago in Dungeons&Dragons
-        e mi abbuffo di sushi quando non riesco nell'impresa.
+    <p>> Nel tempo libero suono, ascolto musica, leggo, cerco di far sopravvivere il mio mago in Dungeons&Dragons
+        e mi abbuffo di sushi quando, inevitabilmente, non riesco nell'impresa.
     </p>
-    <p>> Dai un'occhiata al mio blog o ai progetti su cui ho lavorato/ sto lavorando e contattami per lasciare feedback se trovi qualcosa
-        di tuo interesse. Mi trovi anche su <a href="https://medium.com/@nicola.moro2312">Medium</a>, dove scrivo i miei articoli in inglese.
+    <p>> Mi trovi anche su <a href="https://medium.com/@nicola.moro2312">Medium</a>, dove scrivo i miei articoli in inglese.
     </p>
-    <div>
-        <a href="https://medium.com/@nicola.moro2312">
-            <img style="width: 10%; height=10%" src="/mediumlogo.jpg" alt="mediumlogo">
-        </a>
-        <a href="https://projecteuler.net/progress=NicolaM94">
-            <img src="https://projecteuler.net/profile/NicolaM94.png" alt="">
-        </a>
+    <div style="height: 30px;"></div>
+    <h3>Ultime dal blog</h3>
+    <div class="articles_container">
+        <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts[0].featured_image} alt="">
+                <p>{posts[0].title}</p>
+            </div>
+            <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts[1].featured_image} alt="">
+                <p>{posts[1].title}</p>
+            </div>
+            <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts[2].featured_image} alt="">
+                <p>{posts[2].title}</p>
+            </div>
     </div>
 </div>
 
@@ -28,23 +46,49 @@
     .home_container {
         padding: 25px;
     }
+    h1,h2,h3,h4,p,a {
+        font-family: "Roboto Mono";
+    }
+    h3 {
+        line-height: 0%;
+    }
     h2 {
         font-size: 4pc;
         line-height: 0;
-        font-family: "Roboto Mono";
     }
     h4 {
-        font-family: "Roboto Mono";
         font-size: 1.5pc;
         line-height: 1;
     }
-    p {
-        font-family: "Roboto Mono";
-    }
     a {
-        text-decoration: none;
-        font-family: "Roboto Mono";
-        color: rgb(60, 190, 130);
+        text-decoration:none;
+        color: rgb(0, 218, 116);
+        font-weight: bold;
+    }
+    .articles_container {
+        padding: 1%;
+        border: 1px solid black;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        background: rgb(252, 252, 252);
+        gap: 10px;
+    }
+    .latest_article {
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 1%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2%;
+        transition: all 0.3 ease;
+        background-color: white;
+    }
+    .latest_article:hover {
+        background: #55e6b691;
+        padding: 2%;
+        cursor:pointer;
         font-weight: bold;
     }
 </style>
