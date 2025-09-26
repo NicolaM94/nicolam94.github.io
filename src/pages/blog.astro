@@ -14,7 +14,7 @@ const pageData = response.data?.data;
                 <div class="post_card" id={post.slug}>
                     <img class="featured_image" src={post.featured_image} alt="featured_image">
                     <div class="text_container">
-                        <h2>{post.title}</h2>
+                        <h3>{post.title}</h3>
                         <p>{post.summary}</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ const pageData = response.data?.data;
     }
     .featured_image {
         min-width: 250px;
-        max-height: 175px;
+        max-height: 150px;
         width: 20%;
         height: 20%;
         border-radius: 8px;
