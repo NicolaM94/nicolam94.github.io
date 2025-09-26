@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {butterClient} from "../libs/buttercms";
+const response = await butterClient.post.list()
+const pageData = response.data?.data;
+---
+
+<Layout>
+    <div class="blog_container">
+        <h1>Posts dal blog</h1>
+        <div class="posts_container">
+          {pageData.map((post) => (
+            <a href={"/posts/"+post.slug}>
+                <div class="post_card" id={post.slug}>
+                    <img class="featured_image" src={post.featured_image} alt="featured_image">
+                    <div class="text_container">
+                        <h2>{post.title}</h2>
+                        <p>{post.summary}</p>
+                    </div>
+                </div>
+            </a>
+          ))}
+        </div>
+    </div>
+</Layout>
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+        
+    h1, h2, h4, p, a {
+        font-family: 'Roboto Mono';
+    }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    .blog_container {
+        padding: 25px;
+    }
+    .text_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-right: 5px;
+    }
+    .post_card {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1%;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding-left: 7px;
+    }
+    .posts_container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .post_card:hover {
+        background: #55e6b691;
+        padding: 2%;
+        cursor:pointer;
+    }
+    .featured_image {
+        min-width: 250px;
+        max-height: 175px;
+        width: 20%;
+        height: 20%;
+        border-radius: 8px;
+    }
+</style>

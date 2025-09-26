@@ -1,0 +1,77 @@
+---
+import Layout from "../../layouts/Layout.astro"
+
+export async function getStaticPaths() {
+  const res = await fetch(`https://api.buttercms.com/v2/posts/?auth_token=`.concat(import.meta.env.BUTTER_TOKEN));
+  const data = await res.json();
+  const posts = data.data;
+
+  // Ritorna un array di oggetti { params, props }
+  return posts.map( (post : Post) => ({
+    params: { 
+        slug: post.slug,        
+    },
+    props: { post },
+  }));
+}
+
+const {post} = Astro.props
+---
+
+
+<!-- Qui ricevi `post` come prop -->
+<html lang="it">
+  <head>
+    <title>{post.title}</title>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+  </head>
+  <body>
+    <Layout>
+    <article>
+        <div class="title_container">
+            <img class="featured_image" src={post.featured_image} alt="">
+            <h1>{post.title}</h1>
+        
+        </div>
+            <p><em>{new Date(post.published).toLocaleDateString('it-IT')}</em></p>
+            <div set:html={post.body}></div>
+        </article>
+    </Layout>
+  </body>
+</html>
+
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+    .katex-version {display: none;}
+    .katex-version::after {content:"0.10.2 or earlier";}
+
+    article {
+        font-family: "Roboto Mono";
+        width: 100%;
+        padding-top: 2%;
+        padding-left: 2%;
+        padding-right: 2%;
+        text-align: justify;
+    }
+    .article_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .featured_image {
+        max-width: 400px;
+        border-radius: 8px;
+    }
+    .title_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5%;
+    }
+</style>

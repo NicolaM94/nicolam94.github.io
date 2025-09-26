@@ -3,7 +3,6 @@ import {butterClient} from "../libs/buttercms";
 const response = await butterClient.post.list()
 const pageData = response.data?.data;
 
-
 const posts = pageData?.slice(0,3)
 ---
 
@@ -22,20 +21,20 @@ const posts = pageData?.slice(0,3)
     <p>> Mi trovi anche su <a href="https://medium.com/@nicola.moro2312">Medium</a>, dove scrivo i miei articoli in inglese.
     </p>
     <div style="height: 30px;"></div>
-    <h3>Ultime dal blog</h3>
+    <h3 style="padding-bottom: 1%; font-size: 18px;">Ultime dal blog</h3>
     <div class="articles_container">
         <div class="latest_article">
-                <img style="width: 10%;border-radius: 8px;" src={posts[0].featured_image} alt="">
-                <p>{posts[0].title}</p>
-            </div>
-            <div class="latest_article">
-                <img style="width: 10%;border-radius: 8px;" src={posts[1].featured_image} alt="">
-                <p>{posts[1].title}</p>
-            </div>
-            <div class="latest_article">
-                <img style="width: 10%;border-radius: 8px;" src={posts[2].featured_image} alt="">
-                <p>{posts[2].title}</p>
-            </div>
+            <img style="width: 10%;border-radius: 8px;" src={posts[0].featured_image} alt="">
+            <p>{posts[0].title}</p>
+        </div>
+        <div class="latest_article">
+            <img style="width: 10%;border-radius: 8px;" src={posts[1].featured_image} alt="">
+            <p>{posts[1].title}</p>
+        </div>
+        <div class="latest_article">
+            <img style="width: 10%;border-radius: 8px;" src={posts[2].featured_image} alt="">
+            <p>{posts[2].title}</p>
+        </div>
     </div>
 </div>
 
@@ -71,7 +70,7 @@ const posts = pageData?.slice(0,3)
         border-radius: 8px;
         display: flex;
         flex-direction: column;
-        background: rgb(252, 252, 252);
+        background: rgb(250, 250, 250);
         gap: 10px;
     }
     .latest_article {
