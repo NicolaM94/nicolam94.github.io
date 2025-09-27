@@ -29,7 +29,9 @@
 
 <script is:inline>
   const lightsrc = "/bulb-off.png"
+  
   const darksrc = "/bulb-on.png"
+
   const theme = (() => {
     const localStorageTheme = localStorage?.getItem("theme") ?? '';
     if (['dark', 'light'].includes(localStorageTheme)) {
@@ -43,10 +45,10 @@
 
   if (theme === 'light') {
     document.documentElement.classList.remove('dark');
-    document.getElementById("bulb").src = lightsrc
+    document.getElementById("bulb").src = lightsrc;
   } else {
     document.documentElement.classList.add('dark');
-    document.getElementById("bulb").src = darksrc
+    document.getElementById("bulb").src = darksrc;
   }
 
   window.localStorage.setItem('theme', theme);
