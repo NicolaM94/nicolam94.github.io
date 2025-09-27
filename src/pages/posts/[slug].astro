@@ -1,33 +1,63 @@
 ---
 import Layout from "../../layouts/Layout.astro"
+import Post from "../../libs/buttercms"
 
 export async function getStaticPaths() {
-  const res = await fetch(`https://api.buttercms.com/v2/posts/?auth_token=`.concat(import.meta.env.BUTTER_TOKEN));
-  const data = await res.json();
-  const posts = data.data;
+  const token = import.meta.env.BUTTER_TOKEN;
+  let allPosts: Post[] = [];
+  let page = 1;
+  let totalPages = 1; // inizializziamo
 
-  // Ritorna un array di oggetti { params, props }
-  return posts.map( (post : Post) => ({
-    params: { 
-        slug: post.slug,        
+  do {
+    const res = await fetch(
+      `https://api.buttercms.com/v2/posts/?auth_token=${token}&page=${page}&page_size=50`
+    );
+    const data = await res.json();
+
+    const posts: Post[] = data.data || [];
+    allPosts = allPosts.concat(posts);
+
+    totalPages = data.meta?.total_pages || 1;
+    page++;
+  } while (page <= totalPages);
+
+  // Mappa tutti i post in { params, props }
+  return allPosts.map((post: Post) => ({
+    params: {
+      slug: post.slug,
     },
     props: { post },
   }));
 }
 
-const {post} = Astro.props
+const { post } = Astro.props;
+
 ---
 
 
 <!-- Qui ricevi `post` come prop -->
 <html lang="it">
   <head>
+    <meta charset="UTF-8" />
+    
     <title>{post.title}</title>
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
         integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
         crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-css.min.js"></script>
+        <!-- aggiungi i linguaggi che ti servono -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-kotlin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script> 
+        
   </head>
   <body>
     <Layout>
@@ -42,6 +72,12 @@ const {post} = Astro.props
         </article>
     </Layout>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      Prism.highlightAll();
+    });
+  </script>
 </html>
 
 <style>
@@ -51,6 +87,12 @@ const {post} = Astro.props
     .katex-version {display: none;}
     .katex-version::after {content:"0.10.2 or earlier";}
 
+    h1 {
+        font-size: 50px;
+        text-align: left;
+        text-decoration: underline;
+    }
+    
     article {
         font-family: "Roboto Mono";
         width: 100%;
@@ -58,6 +100,7 @@ const {post} = Astro.props
         padding-left: 2%;
         padding-right: 2%;
         text-align: justify;
+        font-size: large;
     }
     .article_container {
         display: flex;
@@ -70,8 +113,33 @@ const {post} = Astro.props
     }
     .title_container {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         gap: 5%;
     }
+    article {
+        line-height: 1.65;
+        font-size: large;
+        text-align: justify;
+        overflow-x: scroll;
+    }
+
+    article pre {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    
+    article code {
+      font-family: "Roboto Mono", monospace;
+      font-size: 0.95rem;
+    }
+    
+    article pre, article code {
+      text-align: left;      
+      font-size: 0.9rem;     
+    }
+    
 </style>

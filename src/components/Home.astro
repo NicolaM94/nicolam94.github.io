@@ -4,11 +4,13 @@ const response = await butterClient.post.list()
 const pageData = response.data?.data;
 
 const posts = pageData?.slice(0,3)
+const post0slug = "/posts/".concat(posts![0].slug)
+const post1slug = "/posts/".concat(posts![1].slug)
+const post2slug = "/posts/".concat(posts![2].slug)
 ---
 
 
 <div class="home_container">
-    <a href="https://projecteuler.net/progress"><img style="position: absolute;right:1%;top:3%" src="https://projecteuler.net/profile/NicolaM94.png" alt=""></a>
     <p>Ciao! 👋</p>
     <h2>Io sono Nicola</h2>
     <h4>Sviluppo software e matematica 🧑‍💻📚</h4>
@@ -20,21 +22,28 @@ const posts = pageData?.slice(0,3)
     </p>
     <p>> Mi trovi anche su <a href="https://medium.com/@nicola.moro2312">Medium</a>, dove scrivo i miei articoli in inglese.
     </p>
+    <a href="https://projecteuler.net/progress"><img style="padding-top: 1%;" src="https://projecteuler.net/profile/NicolaM94.png" alt=""></a>
     <div style="height: 30px;"></div>
     <h3 style="padding-bottom: 1%; font-size: 18px;">Ultime dal blog</h3>
     <div class="articles_container">
-        <div class="latest_article">
-            <img style="width: 10%;border-radius: 8px;" src={posts[0].featured_image} alt="">
-            <p>{posts[0].title}</p>
-        </div>
-        <div class="latest_article">
-            <img style="width: 10%;border-radius: 8px;" src={posts[1].featured_image} alt="">
-            <p>{posts[1].title}</p>
-        </div>
-        <div class="latest_article">
-            <img style="width: 10%;border-radius: 8px;" src={posts[2].featured_image} alt="">
-            <p>{posts[2].title}</p>
-        </div>
+        <a href={post0slug}>
+            <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts![0].featured_image} alt="">
+                <p>{posts![0].title}</p>
+            </div>
+        </a>
+        <a href={post1slug}>
+            <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts![1].featured_image} alt="">
+                <p>{posts![1].title}</p>
+            </div>
+        </a>
+        <a href={post2slug}>
+            <div class="latest_article">
+                <img style="width: 10%;border-radius: 8px;" src={posts![2].featured_image} alt="">
+                <p>{posts![2].title}</p>
+            </div>
+        </a>
     </div>
 </div>
 
@@ -89,5 +98,8 @@ const posts = pageData?.slice(0,3)
         padding: 2%;
         cursor:pointer;
         font-weight: bold;
+    }
+    .articles_container a {
+        color: black;
     }
 </style>

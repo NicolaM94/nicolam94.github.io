@@ -1,7 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import {butterClient} from "../libs/buttercms";
-const response = await butterClient.post.list()
+const response = await butterClient.post.list({
+    page: 1,
+    page_size: 50
+})
 const pageData = response.data?.data;
 ---
 
@@ -9,7 +12,7 @@ const pageData = response.data?.data;
     <div class="blog_container">
         <h1>Posts dal blog</h1>
         <div class="posts_container">
-          {pageData.map((post) => (
+          {pageData!.map((post) => (
             <a href={"/posts/"+post.slug}>
                 <div class="post_card" id={post.slug}>
                     <img class="featured_image" src={post.featured_image} alt="featured_image">
@@ -36,6 +39,7 @@ const pageData = response.data?.data;
         color: black;
     }
     .blog_container {
+        width: fit-content;
         padding: 25px;
     }
     .text_container {

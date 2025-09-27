@@ -1,0 +1,31 @@
+html.dark {
+  background-color: #292929;
+  color: #fff;
+}
+
+.dark .menu {
+  background-color: #fff;
+  color: #000;
+}
+
+.dark .nav-links a:hover,
+.dark .nav-links a:focus {
+  color: #0d0950;
+}
+
+.dark .nav-links a {
+  color: #fff;
+}
+
+.dark a {
+  color: #ff9776;
+}
+
+
+.dark {
+  .header_container {
+    background-color: #2c2c2c;
+    box-shadow: 5px 10px 5px rgb(66, 66, 66);
+    border-color:rgb(73, 73, 73) ;
+  }
+}
