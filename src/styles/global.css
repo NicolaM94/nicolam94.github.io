@@ -299,3 +299,13 @@ a:hover {
     justify-content: center;
   }
 }
+
+@media (max-width: 375px) {
+  .menu_container a {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
