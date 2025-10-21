@@ -1,19 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { butterClient } from "../libs/buttercms";
+const response = await butterClient.content.retrieve(['progetto'])
+const pageData = response.data?.data;
 ---
 
 <Layout>
-    <div>
-        <h1>Progetti</h1>
-        <p>Una carrellata dei progetti personali su cui ho lavorato o ancora in lavorazione.</p>
-    </div>
+  <div class="projects_container">
+    <h1>I progetti</h1>
+    <h3>Progetti conclusi o in lavorazione</h3>
+    {pageData!.progetto!.map((prog) =>(
+        <div class="project_card">
+            <h2>{prog.titolo}</h1>
+            <div class="project_card_content">
+                <img src={prog.immagine} class="project_card_image">
+                <div class="project_card_text">
+                    <p>{prog.descrizione}</p>
+                    <a href={prog.url}>Link al progetto</a>
+                </div>
+            </div>
+        </div>
+    ))}
+  </div>
+
 </Layout>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-    h1, h2, h4, p, a {
+    h1, h2, h4, h3, p, a {
         font-family: 'Roboto Mono';
     }
 
+    .projects_container {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+    }
+    .project_card {
+        border-radius: 10px;
+        border: 1px solid coral;
+        padding: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .project_card_content {
+        display: flex;
+        flex-direction: row;
+        gap: 1%;
+    }
+    .project_card_image {
+        max-width: 300px;
+    }
 </style>
